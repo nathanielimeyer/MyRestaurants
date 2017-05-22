@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
-    private Button myFindRestaurantsButton;
+    private Button mFindRestaurantsButton;
     private EditText mLocationEditText;
 
     @Override
@@ -20,8 +20,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mLocationEditText = (EditText) findViewById(R.id.locationEditText);
-        myFindRestaurantsButton = (Button) findViewById(R.id.findRestaurantsButton);
-        myFindRestaurantsButton.setOnClickListener(new View.OnClickListener() {
+        mFindRestaurantsButton = (Button) findViewById(R.id.findRestaurantsButton);
+        mFindRestaurantsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String location = mLocationEditText.getText().toString();
