@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -22,11 +23,13 @@ import okhttp3.Response;
 public class RestaurantsActivity extends AppCompatActivity {
     public static final String TAG = RestaurantsActivity.class.getSimpleName();
     @Bind(R.id.locationTextView) TextView mLocationTextView;
-    private String[] restaurants = new String[] {"Sweet Hereafter", "Cricket", "Hawthorne Fish House", "Viking Soul Food", "Red Square", "Horse Brass", "Dick's Kitchen", "Taco Bell", "Me Kha Noodle Bar", "La Bonita Taqueria", "Smokehouse Tavern", "Pembiche", "Kay's Bar", "Gnarly Grey", "Slappy Cakes", "Mi Mero Mole" };
+    @Bind(R.id.listView) ListView mListView;
 
+    public ArrayList<Restaurant> mRestaurants = new ArrayList<>();
+
+    private String[] restaurants = new String[] {"Sweet Hereafter", "Cricket", "Hawthorne Fish House", "Viking Soul Food", "Red Square", "Horse Brass", "Dick's Kitchen", "Taco Bell", "Me Kha Noodle Bar", "La Bonita Taqueria", "Smokehouse Tavern", "Pembiche", "Kay's Bar", "Gnarly Grey", "Slappy Cakes", "Mi Mero Mole" };
     private String[] cuisines = new String[] {"Vegan Food", "Breakfast", "Fishs Dishs", "Scandinavian", "Coffee", "English Food", "Burgers", "Fast Food", "Noodle Soups", "Mexican", "BBQ", "Cuban", "Bar Food", "Sports Bar", "Breakfast", "Mexican" };
 
-    @Bind(R.id.listView) ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +67,10 @@ public class RestaurantsActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 try {
                     String jsonData = response.body().string();
-                    Log.v(TAG, jsonData);
+                    if (response.isSuccessful()) {
+                        Log.v(TAG, jsonData);
+                        mRestaurants = yelpService.processResults(response);
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
