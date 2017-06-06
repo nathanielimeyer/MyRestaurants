@@ -35,7 +35,8 @@ public class SavedRestaurantsListActivity extends AppCompatActivity {
 
     private void setUpFirebaseAdapter() {
         mFirebaseAdapter = new FirebaseRecyclerAdapter<Restaurant, FirebaseRestaurantViewHolder>
-                (Restaurant.class, R.layout.restaurant_list_item, FirebaseRestaurantViewHolder.class, mRestaurantReference) {
+                (Restaurant.class, R.layout.restaurant_list_item, FirebaseRestaurantViewHolder.class,
+                        mRestaurantReference) {
             @Override
             protected void populateViewHolder(FirebaseRestaurantViewHolder viewHolder,
                                               Restaurant model, int position) {
